@@ -1,9 +1,9 @@
 import './App.css'
 
 // const data = [
-//   { name: "Anom", age: 19, gender: "Male" },
-//   { name: "Megha", age: 19, gender: "Female" },
-//   { name: "Subham", age: 25, gender: "Male" },
+//   { name: "abc", age: 19, gender: "Male" },
+//   { name: "def", age: 19, gender: "Female" },
+//   { name: "ghi", age: 25, gender: "Male" },
 // ]
 export const App = () => {
   const [data, setData] = useState([]);
