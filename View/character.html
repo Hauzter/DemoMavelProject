@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Details</title>
+</head>
+
+<body>
+    <div id="character-details"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const characterId = urlParams.get('id');
+
+        fetch(`http://gateway.marvel.com/v1/public/characters/${characterId}?ts=1667722238&apikey=df17d2ee72f64e3bea59f98b87e57bb9&hash=18b5a5757dc9077ff8f8fbab26a6a4fb`)
+            .then(response => response.json())
+            .then(data => {
+                const character = new Object(data.data.results);
+                const characterDetails = document.querySelector("#character-details");
+                const characterName = new String(character.name);
+                const characterId = new String(character.id);
+                const characterDescription = new String(character.description);
+                const characterModified = Date.parse(character.modified);
+
+                const characterInfo = `
+                    <h1>${characterName}</h1>
+                    <p>ID: ${characterId}</p>
+                    <p>Description: ${characterDescription}</p>
+                    <p>Modified: ${characterModified}</p>
+                `;
+
+                characterDetails.innerHTML = characterInfo;
+
+            }
+
+            )
+            .catch(error => console.error(error));
+        console.log(character);
+    </script>
+</body>
+
+</html>
