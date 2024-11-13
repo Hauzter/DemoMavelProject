@@ -15,24 +15,26 @@
         const urlParams = new URLSearchParams(window.location.search);
         const characterId = urlParams.get('id');
 
-        fetch(`http://gateway.marvel.com/v1/public/characters/${characterId}?ts=1667722238&apikey=df17d2ee72f64e3bea59f98b87e57bb9&hash=18b5a5757dc9077ff8f8fbab26a6a4fb`)
+        fetch(`http://localhost:3000/characterDetail`)
             .then(response => response.json())
             .then(data => {
 
                 //const character = eval("(function(){return " + data.data.results + ";})()");
-                const character = data.data.results[0];
+                const character = data[0];
                 const characterDetails = document.querySelector("#character-details");
                 const characterName = character.name;
                 const characterId = character.id;
-                const characterDescription = character.description;
                 const characterModified = character.modified;
+                const characterThumbnailPath = character.thumbnail.path;
+                const characterThumbnailExtension = character.thumbnail.extension
+                const characterThumbnail = characterThumbnailPath +'.'+characterThumbnailExtension
                 //const characterModified = character.modified;
 
                 const characterInfo = `
                     <h1>${characterName}</h1>
                     <p>ID: ${characterId}</p>
-                    <p>Description: ${characterDescription}</p>
                     <p>Modified: ${characterModified}</p>
+                    <img src="${characterThumbnail}" width="500" height="600">
                 `;
 
                 characterDetails.innerHTML = characterInfo;
@@ -41,7 +43,6 @@
 
             )
             .catch(error => console.error(error));
-        console.log(character);
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
